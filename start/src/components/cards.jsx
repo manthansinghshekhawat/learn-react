@@ -1,4 +1,4 @@
-function Card() {
+function Card(props) {
   return (
     <div className="max-w-sm bg-white border border-grey-200 rounded -xl mt-8 shadow overflow-hidden transition-shadow">
       <img
@@ -7,7 +7,7 @@ function Card() {
         alt="Sample Image"
       ></img>
       <div className="p-4">
-        <h2 className="text-lg font-semibold  text-gray-800">Card Title</h2>
+        <h2 className="text-lg font-semibold  text-gray-800">{props.title}</h2>
         <p className="mt-2 text-gray-600 text-sm">
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sit cum
           ducimus, hic laboriosam reiciendis dolor?

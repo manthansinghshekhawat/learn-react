@@ -5,8 +5,8 @@ function App() {
   return (
     <>
       <div className="flex gap-4">
-        <Card />
-        <Card />
+        <Card title="Python" />
+        <Card title="Cython" />
       </div>
     </>
   );
