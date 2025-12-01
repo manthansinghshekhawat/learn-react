@@ -1,6 +1,12 @@
+import { useState } from "react";
 import "./App.css";
 
 function App() {
+  const [count, setCount] = useState(0);
+  const [formCount, setFormCount] = useState(0);
+  // const incrementhandler = () => {
+  //   setCount(4);
+  // };
   return (
     <div
       style={{
@@ -26,11 +32,13 @@ function App() {
           fontWeight: "500",
         }}
       >
-        Count: 32
+        {count}
       </div>
       <div style={{ textAlign: "center", marginBottom: "20px" }}>
         <button
-          onClick={() => {}}
+          onClick={() => {
+            setCount(count + 1);
+          }}
           style={{
             margin: "0 10px",
             padding: "10px 20px",
@@ -47,7 +55,9 @@ function App() {
           Increase
         </button>
         <button
-          onClick={() => {}}
+          onClick={() => {
+            setCount(Math.max(0, count - 1));
+          }}
           style={{
             margin: "0 10px",
             padding: "10px 20px",
@@ -64,7 +74,9 @@ function App() {
           Decrease
         </button>
         <button
-          onClick={() => {}}
+          onClick={() => {
+            setCount(0);
+          }}
           style={{
             margin: "0 10px",
             padding: "10px 20px",
@@ -91,11 +103,14 @@ function App() {
             marginRight: "10px",
             fontSize: "1em",
           }}
-          value="8"
-          onChange={() => {}}
+          value={Number(formCount)}
+          onChange={(e) => setFormCount(Number(e.target.value))}
         />
         <button
-          onClick={() => {}}
+          onClick={() => {
+            setCount(Number(formCount));
+            setFormCount(0);
+          }}
           style={{
             padding: "10px 20px",
             backgroundColor: "#28A745",
@@ -108,7 +123,7 @@ function App() {
             boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
           }}
         >
-          Set
+          Set to {formCount}
         </button>
       </div>
     </div>
