@@ -4,7 +4,7 @@ import QueueForm from "./components/QueueForm";
 export default function App() {
   const [queue, setQueue] = useState([]);
   const addToQueue = (customer) => {
-    //add to queue
+    setQueue([...queue, { ...customer, id: Date.now(), status: "waiting" }]);
   };
   const updateStatus = (id, newStatus) => {
     // Update the status in queue
