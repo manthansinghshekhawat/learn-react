@@ -1,176 +1,314 @@
 :root {
-  --background: #1a1a1a;
-  --surface: #2d2d2d;
-  --primary: #646cff;
+  /* Modern Dark Palette */
+  --background: #0f1115; /* Deeper, richer black/blue */
+  --surface: #1e212b; /* Slightly lighter for cards */
+  --surface-border: #2f3342;
+
+  /* Vibrant Gradients for Buttons */
+  --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+  --success-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  --error-gradient: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+  --info-gradient: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+
+  /* Text Colors */
   --text: #ffffff;
-  --text-secondary: #888888;
-  --success: #4caf50;
-  --warning: #ff9800;
-  --error: #f44336;
-  --info: #2196f3;
+  --text-muted: #94a3b8;
+
+  /* Shadows */
+  --glow-primary: 0 0 20px rgba(99, 102, 241, 0.4);
+  --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
 }
 
 body {
   background-color: var(--background);
   color: var(--text);
   margin: 0;
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  /* Subtle background pattern */
+  background-image: radial-gradient(
+    circle at top right,
+    #1e212b 0%,
+    transparent 40%
+  );
 }
 
 .app {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 3rem 2rem;
 }
 
+/* --- Header Styling --- */
 header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
+  animation: fadeIn 0.8s ease-out;
 }
 
 header h1 {
-  color: var(--primary);
+  font-size: 2.5rem;
   margin-bottom: 0.5rem;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+  letter-spacing: -1px;
 }
 
 header p {
-  color: var(--text-secondary);
+  color: var(--text-muted);
+  font-size: 1.1rem;
 }
 
 main {
   display: grid;
-  grid-template-columns: 350px 1fr;
-  gap: 2rem;
+  grid-template-columns: 380px 1fr;
+  gap: 2.5rem;
 }
 
-.queue-form {
+/* --- Cards (Queue Form & Display) --- */
+.queue-form,
+.queue-display {
   background: var(--surface);
-  padding: 1.5rem;
-  border-radius: 8px;
+  padding: 2rem;
+  border-radius: 16px;
+  border: 1px solid var(--surface-border);
+  box-shadow: var(--shadow-card);
   height: fit-content;
+  transition: transform 0.3s ease;
 }
 
-.queue-form h2 {
+.queue-form h2,
+.queue-display h2 {
   margin-top: 0;
   margin-bottom: 1.5rem;
-  color: var(--primary);
+  font-size: 1.25rem;
+  color: var(--text);
+  border-bottom: 1px solid var(--surface-border);
+  padding-bottom: 1rem;
 }
 
+/* --- Form Elements --- */
 .form-group {
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
 }
 
 input,
 select {
   width: 100%;
-  padding: 0.75rem;
-  border: 1px solid var(--text-secondary);
-  border-radius: 4px;
-  background: var(--background);
+  padding: 0.875rem 1rem;
+  border: 1px solid var(--surface-border);
+  border-radius: 8px;
+  background: #151820; /* Darker input bg */
   color: var(--text);
-  font-size: 1rem;
+  font-size: 0.95rem;
   box-sizing: border-box;
-  height: 45px;
-}
-
-select {
-  appearance: none;
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
-  background-repeat: no-repeat;
-  background-position: right 0.7rem center;
-  background-size: 1.5em;
+  height: 50px;
+  transition: all 0.2s ease;
 }
 
 input:focus,
 select:focus {
   outline: none;
-  border-color: var(--primary);
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+  background: #1a1d26;
 }
 
+/* Custom Select Arrow */
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2394a3b8'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1.2em;
+}
+
+/* --- BUTTONS (The Major Upgrade) --- */
 button {
   width: 100%;
-  padding: 0.75rem;
-  background: var(--primary);
-  color: var(--text);
+  padding: 0.875rem;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  font-size: 1rem;
-  height: 45px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: white;
+  height: 50px;
+
+  /* Default Primary Button Style */
+  background: var(--primary-gradient);
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
 }
 
+/* Hover Effect (Lift & Glow) */
 button:hover {
-  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.5);
+  filter: brightness(1.1);
 }
 
-.queue-display {
-  background: var(--surface);
-  padding: 1.5rem;
-  border-radius: 8px;
+/* Click Effect */
+button:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0 2px 10px rgba(99, 102, 241, 0.3);
 }
 
+/* --- Action Buttons (Small) --- */
+.actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+/* Updated Selector: Targets the specific classes instead of just 'button' tags */
+.actions button,
+.serve-btn,
+.remove-btn {
+  width: auto;
+  min-width: 80px; /* NEW: Prevents square buttons on short text */
+  padding: 0.5rem 1.25rem;
+  height: 36px;
+  font-size: 0.85rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  display: inline-flex; /* Ensures flex alignment works on links too */
+  align-items: center;
+  justify-content: center;
+  text-decoration: none; /* Removes underline if it's a link */
+  line-height: 1;
+}
+
+/* Serve Button (Green) */
+.serve-btn {
+  width: auto;
+  min-width: 40px; /* NEW: Prevents square buttons on short text */
+  padding: 0.5rem 1.25rem;
+  height: 20px;
+  background: var(--success-gradient);
+  color: white; /* Ensures text is white if it's a link */
+}
+.serve-btn:hover {
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+  transform: translateY(-2px); /* consistent hover effect */
+}
+
+/* Complete Button (Blue) */
+.complete-btn {
+  background: var(--info-gradient);
+}
+
+/* Remove Button (Red) */
+.remove-btn {
+  background: var(--error-gradient);
+  color: white;
+}
+.remove-btn:hover {
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+  transform: translateY(-2px);
+}
+/* --- Queue List Items --- */
 .queue-list {
   display: grid;
   gap: 1rem;
 }
 
 .queue-item {
-  background: var(--background);
-  padding: 1rem;
-  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 1.25rem;
+  border-radius: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  animation: slideIn 0.3s ease-out;
+}
+
+.queue-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.1);
+  transform: translateX(4px);
 }
 
 .customer-info h3 {
   margin: 0;
   color: var(--text);
+  font-size: 1.1rem;
 }
 
 .customer-info p {
-  margin: 0.5rem 0;
-  color: var(--text-secondary);
+  margin: 0.25rem 0 0 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
 }
 
 .status {
-  font-size: 0.875rem;
-  font-weight: 500;
-}
-
-.actions {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.actions button {
-  width: auto;
-  padding: 0.5rem 1rem;
-}
-
-.serve-btn {
-  background: var(--success);
-}
-
-.complete-btn {
-  background: var(--info);
-}
-
-.remove-btn {
-  background: var(--error);
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: rgba(255, 255, 255, 0.1);
+  margin-top: 0.5rem;
 }
 
 .empty-queue {
   text-align: center;
-  color: var(--text-secondary);
+  padding: 3rem;
+  color: var(--text-muted);
+  font-style: italic;
+  border: 2px dashed var(--surface-border);
+  border-radius: 12px;
 }
 
-@media (max-width: 768px) {
+/* --- Animations --- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 850px) {
   main {
     grid-template-columns: 1fr;
+  }
+
+  .queue-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .actions {
+    width: 100%;
+    justify-content: flex-end;
   }
 }
